@@ -3,8 +3,10 @@ module logger
 ####################
 include("db/que.jl")
 include("db/con.jl")
+include("kit/structs.jl")
 using .que
 using .con
+using .structs
 using CSV
 using DataFrames
 using MySQL
@@ -21,25 +23,26 @@ end
 
 ##################################################
 
-# UNPACK SAMPLE
-
-mutable struct friend2
+mutable struct friendd
     logs::Array
     unity::Float64
 end
 
+# UNPACK SAMPLE
+f=[]
+
 function unpack(DataFrame)
   for row in eachrow(DataFrame)
     v = vec(convert(Array, row))
-    x = friend2(v,0.1)
-    push!([], x)
+    x = friendd(v,0.1)
+    push!(f, x)
   end
-  return []
+  return f
 end
 
 ##################################################
-
+d = DataFrame(CSV.File("/home/vince/lg.csv"))
 run_sq()
-unpack(DataFrame(CSV.File("/home/vince/lg.csv")))
+unpack(d)
 
-end # module
+end
