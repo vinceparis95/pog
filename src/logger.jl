@@ -3,10 +3,8 @@ module logger
 ####################
 include("db/que.jl")
 include("db/con.jl")
-include("kit/structs.jl")
 using .que
 using .con
-using .structs
 using CSV
 using DataFrames
 using MySQL
@@ -15,13 +13,14 @@ using MySQL
 
 # SYNC DATABASE
 
-function run_sq()
-    cur = DBInterface.execute(dbcB, sq3b)
-    cur = DBInterface.execute(dbcB, sq4b)
-    df = DataFrame(cur)
-end
+cur = DBInterface.execute(dbcB, sq4b)
+df = DataFrame(cur)
+
 
 ##################################################
+
+cur = DBInterface.execute(dbcB, sq4b)
+df = DataFrame(cur)
 
 mutable struct friendd
     logs::Array
