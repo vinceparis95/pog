@@ -1,5 +1,5 @@
 
-module con
+module conn
 using MySQL
 using DBInterface
 

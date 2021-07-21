@@ -1,10 +1,10 @@
 module logger
 
 ####################
-include("db/que.jl")
-include("db/con.jl")
-using .que
-using .con
+include("db/query.jl")
+include("db/conn.jl")
+using .query
+using .conn
 using CSV
 using DataFrames
 using MySQL
@@ -13,16 +13,18 @@ using MySQL
 
 # SYNC DATABASE
 
-cur = DBInterface.execute(dbcB, sq4b)
+cur = DBInterface.execute(dbcB, sq3)
 df = DataFrame(cur)
 
 
 ##################################################
 
+# extract columns from db or add new column
 cur = DBInterface.execute(dbcB, sq4b)
 df = DataFrame(cur)
+print(df)
 
-mutable struct friendd
+mutable struct transformer
     logs::Array
     unity::Float64
 end
